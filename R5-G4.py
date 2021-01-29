@@ -1,25 +1,26 @@
-import random
+import discord, discord.player, random, ffmpeg
+import discord.player
+from discord.ext import commands
 
-import discord
+print("Vwooooo!")
 
-client = discord.Client()
-
-
-@client.event
-async def on_ready():
-    print("{0.user}: Bwoooooop!".format(client))
+R5 = commands.Bot(command_prefix='$R5:')
 
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
-
-    if message.content.startswith('$R5: Obligation'):
-        await message.channel.send("*Whistle*: " + str(random.randint(1, 100)))
-
-    if message.content.startswith('$R5-G4'):
-        await message.channel.send("BEEEEeeeep!")
+@R5.command('obligation')
+async def obligation(ctx):
+    await ctx.channel.send(str(random.randint(1, 100)))
 
 
-client.run()
+@R5.command('play')
+async def play(ctx):
+    print("Vwwooooo...")
+    guild = ctx.guild
+    voice_client: discord.VoiceClient = discord.utils.get(R5.voice_clients, guild=guild)
+    audio_source = discord.player.FFmpegPCMAudio('home/dennis/Documents/personal/repo/R5-G4/r2sounds.mp3')
+    # audio_source = discord.FFmpegPCMAudio('home/dennis/Documents/personal/repo/R5-G4/r2sounds.mp3')
+    if not voice_client.is_playing():
+        voice_client.play(audio_source, after=None)
+
+
+R5.run("")
