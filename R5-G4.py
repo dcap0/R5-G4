@@ -37,6 +37,12 @@ async def play(ctx, song: str):
     voice.play(discord.FFmpegPCMAudio(song))
 
 
+@R5.command('stop')
+async def stop(ctx):
+    voice = discord.utils.get(R5.voice_clients, guild=ctx.guild)
+    voice.stop()
+
+
 # @R5.command('pause')
 # async def pause(ctx):
 #     voice = discord.utils.get(R5.voice_clients, guild=ctx.guild)
@@ -52,11 +58,6 @@ async def play(ctx, song: str):
 #         voice.resume
 #     else:
 #         await ctx.send("BEEEEP!")
-#
-# @R5.command('stop')
-# async def stop(ctx):
-#     voice = discord.utils.get(R5.voice_clients, guild=ctx.guild)
-#     voice.stop()
 
 
 R5.run("")
