@@ -16,13 +16,16 @@ err = 'err.mp3'
 
 
 def returnChannelSound():
-    clip = channelSounds[random.randint(0, 2)]
-    print(clip)
-    return RES_DIR + clip
+    return RES_DIR + channelSounds[random.randint(0, 2)]
 
 
 def returnRandomSound():
     return RES_DIR + randomSounds[random.randint(0, 7)]
+
+
+@R5.command('speak', brief="R5 plays a random sound")
+async def speak(ctx):
+    R5.voice_clients[0].play(discord.FFmpegPCMAudio(returnRandomSound()))
 
 
 @R5.command('obligation', brief="R5 rolls a d100 to determine the obligation.")
@@ -33,6 +36,8 @@ async def obligation(ctx):
         voice.play(discord.FFmpegPCMAudio(returnRandomSound()))
         await ctx.send(random.randint(1, 100))
     except discord.ext.commands.CommandInvokeError:
+        await ctx.send(random.randint(1, 100))
+    except AttributeError:
         await ctx.send(random.randint(1, 100))
 
 
@@ -75,6 +80,12 @@ async def play(ctx, song: str):
 async def stop(ctx):
     voice = discord.utils.get(R5.voice_clients, guild=ctx.guild)
     voice.stop()
+
+
+@R5.command('query', brief='Search databank for information about a subject. Encase in ""')
+async def query(ctx, arg: str):
+    userquery = arg.replace('"', '').replace(" ", "_")
+    await ctx.message.author.send("https://starwars.fandom.com/wiki/" + userquery)
 
 
 R5.run("")
