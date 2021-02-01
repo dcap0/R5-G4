@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import random
 import os
+import time
 
 RES_DIR = os.path.dirname(os.path.abspath(__file__)) + "/res/"
 
@@ -15,7 +16,9 @@ err = 'err.mp3'
 
 
 def returnChannelSound():
-    return RES_DIR + channelSounds[random.randint(0, 2)]
+    clip = channelSounds[random.randint(0, 2)]
+    print(clip)
+    return RES_DIR + clip
 
 
 def returnRandomSound():
@@ -26,7 +29,7 @@ def returnRandomSound():
 async def obligation(ctx):
     voice = discord.utils.get(R5.voice_clients, guild=ctx.guild)
     try:
-        await voice.play(discord.FFmpegPCMAudio(returnRandomSound()))
+        voice.play(discord.FFmpegPCMAudio(returnRandomSound()))
         await ctx.send(random.randint(1, 100))
     except discord.ext.commands.CommandInvokeError:
         await ctx.send(random.randint(1, 100))
@@ -41,21 +44,24 @@ async def join(ctx):
         voice = discord.utils.get(R5.voice_clients, guild=ctx.guild)
         voice.play(discord.FFmpegPCMAudio(returnChannelSound()))
     except discord.ClientException:
+        voice = discord.utils.get(R5.voice_clients, guild=ctx.guild)
         await ctx.send("BEEEEP!")
         voice.play(discord.FFmpegPCMAudio(RES_DIR + err))
 
 
 @R5.command('leave')
 async def leave(ctx):
-    voice = discord.utils.get(R5.voice_clients, guild=ctx.guild)
-    voice.stop()
     try:
-        voice.play(discord.FFmpegPCMAudio(returnChannelSound()))
+        R5.voice_clients[0].play(discord.FFmpegPCMAudio(returnChannelSound()))
+        print("snooze")
+        time.sleep(4)
         await R5.voice_clients[0].disconnect()
     except discord.ClientException:
         await ctx.send("BEEEEP!")
     except IndexError:
         await ctx.send("BEEEEP!")
+    finally:
+        print("Sound played")
 
 
 @R5.command('play')
