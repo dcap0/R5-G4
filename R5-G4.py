@@ -25,17 +25,18 @@ def returnRandomSound():
     return RES_DIR + randomSounds[random.randint(0, 7)]
 
 
-@R5.command('obligation')
+@R5.command('obligation', brief="R5 rolls a d100 to determine the obligation.")
 async def obligation(ctx):
     voice = discord.utils.get(R5.voice_clients, guild=ctx.guild)
     try:
+        voice.stop()
         voice.play(discord.FFmpegPCMAudio(returnRandomSound()))
         await ctx.send(random.randint(1, 100))
     except discord.ext.commands.CommandInvokeError:
         await ctx.send(random.randint(1, 100))
 
 
-@R5.command('join')
+@R5.command('join', brief="Joins R5 to the voice channel.")
 async def join(ctx):
     vc = ctx.message.author.voice.channel
     try:
@@ -48,9 +49,10 @@ async def join(ctx):
         voice.play(discord.FFmpegPCMAudio(RES_DIR + err))
 
 
-@R5.command('leave')
+@R5.command('leave', brief="Kicks R5 from the voice channel.")
 async def leave(ctx):
     try:
+        R5.voice_clients[0].stop()
         R5.voice_clients[0].play(discord.FFmpegPCMAudio(returnChannelSound()))
         print("snooze")
         time.sleep(4)
@@ -63,13 +65,13 @@ async def leave(ctx):
         print("Sound played")
 
 
-@R5.command('play')
+@R5.command('play', brief="Plays a song that R5 has in his memory banks")
 async def play(ctx, song: str):
     voice = discord.utils.get(R5.voice_clients, guild=ctx.guild)
     voice.play(discord.FFmpegPCMAudio(song))
 
 
-@R5.command('stop')
+@R5.command('stop', brief="Stops R5 from playing any music.")
 async def stop(ctx):
     voice = discord.utils.get(R5.voice_clients, guild=ctx.guild)
     voice.stop()
