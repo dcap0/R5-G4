@@ -35,7 +35,6 @@ async def obligation(ctx):
         await ctx.send(random.randint(1, 100))
 
 
-
 @R5.command('join')
 async def join(ctx):
     vc = ctx.message.author.voice.channel
@@ -74,23 +73,6 @@ async def play(ctx, song: str):
 async def stop(ctx):
     voice = discord.utils.get(R5.voice_clients, guild=ctx.guild)
     voice.stop()
-
-
-# @R5.command('pause')
-# async def pause(ctx):
-#     voice = discord.utils.get(R5.voice_clients, guild=ctx.guild)
-#     if voice.is_playing():
-#
-#     else:
-#         await ctx.send("BEEEEP!")
-#
-# @R5.command('resume')
-# async def resume(ctx):
-#     voice = discord.utils.get(R5.voice_clients, guild=ctx.guild)
-#     if voice.is_paused():
-#         voice.resume
-#     else:
-#         await ctx.send("BEEEEP!")
 
 
 R5.run("")
