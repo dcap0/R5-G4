@@ -1,10 +1,12 @@
-import discord
-from discord.ext import commands
-import random
 import os
+import random
 import time
 
+import discord
+from discord.ext import commands
+
 RES_DIR = os.path.dirname(os.path.abspath(__file__)) + "/res/"
+
 
 print("Vwooooo!")
 
@@ -88,4 +90,4 @@ async def query(ctx, arg: str):
     await ctx.message.author.send("https://starwars.fandom.com/wiki/" + userquery)
 
 
-R5.run("ODA0NDg3MTY5MDg2ODQ5MDU1.YBNDDw.A_68dXurpC0lYs7Wj4vn0QL32tI")
+R5.run("")
