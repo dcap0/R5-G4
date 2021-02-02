@@ -88,4 +88,4 @@ async def query(ctx, arg: str):
     await ctx.message.author.send("https://starwars.fandom.com/wiki/" + userquery)
 
 
-R5.run("")
+R5.run("ODA0NDg3MTY5MDg2ODQ5MDU1.YBNDDw.A_68dXurpC0lYs7Wj4vn0QL32tI")
