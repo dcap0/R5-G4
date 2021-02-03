@@ -20,7 +20,7 @@ err = 'err.mp3'
 rules = "Edge of the Empire sourcebook: https://drive.google.com/file/d/1etmm_GumqWdRdmlRZBA2hEGKR2sadT-G/view?usp=sharing"
 diceApp = "Android App for game dice: https://play.google.com/store/apps/details?id=com.visttux.empireedgediceroller&hl=en_US&gl=US"
 videoGuide = "Quick Video Tutorial :https://www.youtube.com/watch?v=Ht6x47NhgG8"
-
+fullResource = rules + "\n~~~~~~~~~~~~~~~~~~~~\n" + diceApp + "\n~~~~~~~~~~~~~~~~~~~~\n" + videoGuide
 
 def returnChannelSound():
     return RES_DIR + 'vcSounds/' + channelSounds[random.randint(0, 2)]
@@ -124,15 +124,15 @@ async def query(ctx):
     try:
         if not R5.voice_clients[0].is_playing():
             R5.voice_clients[0].play(discord.FFmpegPCMAudio(returnRandomSound()))
-            await ctx.message.author.send(rules + "\n~~~~~~~~~~~~~~~~~~~~\n" + diceApp + "\n~~~~~~~~~~~~~~~~~~~~\n" + videoGuide)
+            await ctx.message.author.send(fullResource)
         else:
-            await ctx.message.author.send(rules + "\n~~~~~~~~~~~~~~~~~~~~\n" + diceApp + "\n~~~~~~~~~~~~~~~~~~~~\n" + videoGuide)
+            await ctx.message.author.send(fullResource)
     except discord.ext.commands.CommandInvokeError:
-        await ctx.message.author.send(rules + "\n~~~~~~~~~~~~~~~~~~~~\n" + diceApp + "\n~~~~~~~~~~~~~~~~~~~~\n" + videoGuide)
+        await ctx.message.author.send(fullResource)
     except AttributeError:
-        await ctx.message.author.send(rules + "\n~~~~~~~~~~~~~~~~~~~~\n" + diceApp + "\n~~~~~~~~~~~~~~~~~~~~\n" + videoGuide)
+        await ctx.message.author.send(fullResource)
     except IndexError:
-        await ctx.message.author.send(rules + "\n~~~~~~~~~~~~~~~~~~~~\n" + diceApp + "\n~~~~~~~~~~~~~~~~~~~~\n" + videoGuide)
+        await ctx.message.author.send(fullResource)
     
 
 R5.run("ODA0NDg3MTY5MDg2ODQ5MDU1.YBNDDw._RU6NG_bL39bO_0q2zC9NizMXAw")
