@@ -15,18 +15,18 @@ collection = db["testing"]
 results = collection.find({"hello":"world"})
 
 # print results
-# for result in results:
-#     print(result)
+for result in results:
+    print(result)
 
-#print the value of key _id
-#for r in results:
-#    print(r["_id"])
+# print the value of key _id
+for r in results:
+   print(r["_id"])
 
-#query by _id
-# resultz = collection.find({"_id":0})
+# query by _id
+resultz = collection.find({"_id":0})
 
-# for r in resultz:
-#     print(r)
+for r in resultz:
+    print(r)
 
-
+# update an existing record
 collection.update_one({"_id":0},{"$set":{"hello":"goodbye"}})
