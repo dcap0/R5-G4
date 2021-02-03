@@ -124,4 +124,4 @@ async def query(ctx):
         await ctx.message.author.send(fullResource)
     
 
-R5.run("ODA0NDg3MTY5MDg2ODQ5MDU1.YBNDDw._RU6NG_bL39bO_0q2zC9NizMXAw")
+R5.run("")
