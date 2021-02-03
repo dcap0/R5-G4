@@ -5,3 +5,5 @@ venv/
 /res/atmosSounds/*.mp3
 /res/rSounds/*.mp3
 /res/vcSounds/*.mp3
+__pycache__/
+*.pyc
