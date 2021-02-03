@@ -1,29 +1,15 @@
-# from pymongo import MongoClient
+import pymongo
+from pymongo import MongoClient
 
-# R5MemInit = MongoClient('localhost', 27017)
+R5MemInit = MongoClient("mongodb+srv://R5:AMP4ebTru8cCgqh1@r5-mem.7lkv7.mongodb.net/R5test?retryWrites=true&w=majority")
 
-# db = R5MemInit.test_database
-#
-# # print(db.list_collection_names()) shows all collection names
-#
-# testCollection = db["test"]
-#
-# # testCollection.insert_one({"test2":"data2"}) Inserts a particular data piece.
-# # print(testCollection.find_one({"test":"data"})) Prints the specific key:pair and its ID
-#
-# #prints out each key:pair
-# for test in testCollection.find():
-#     print(test)
-#
-# query = {"test2":"data2"}
-# replace = {"testAlpha":"dataAlpha"}
-#
-# testCollection.update_one(query,replace)
-#
-# for test in testCollection.find():
-#     print(test)
-#
-#
+db = R5MemInit["R5test"]
+collection = db["testing"]
+
+post = {"_id":1,"it's":"working!"}
+
+collection.insert_one(post)
+
 
 
 
