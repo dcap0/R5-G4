@@ -11,9 +11,15 @@ print("Vwooooo!")
 
 R5 = commands.Bot(command_prefix='R5:')
 
+#sound resources
 channelSounds = ['vc1.mp3', 'vc2.mp3', 'vc3.mp3']
 randomSounds = ['r1.mp3', 'r2.mp3', 'r3.mp3', 'r4.mp3', 'r5.mp3', 'r6.mp3', 'r7.mp3', 'r8.mp3']
 err = 'err.mp3'
+
+#player resources
+rules = "Edge of the Empire sourcebook: https://drive.google.com/file/d/1etmm_GumqWdRdmlRZBA2hEGKR2sadT-G/view?usp=sharing"
+diceApp = "Android App for game dice: https://play.google.com/store/apps/details?id=com.visttux.empireedgediceroller&hl=en_US&gl=US"
+videoGuide = "Quick Video Tutorial :https://www.youtube.com/watch?v=Ht6x47NhgG8"
 
 
 def returnChannelSound():
@@ -44,6 +50,8 @@ async def obligation(ctx):
     except discord.ext.commands.CommandInvokeError:
         await ctx.send(random.randint(1, 100))
     except AttributeError:
+        await ctx.send(random.randint(1, 100))
+    except IndexError:
         await ctx.send(random.randint(1, 100))
 
 
@@ -105,18 +113,26 @@ async def query(ctx, arg: str):
 
 @R5.command('atmos', brief='*Plays atmospheric sounds. R5:help atmos to get list of sounds',
             description="List of sound options will be here")
-async def query(ctx, arg: str):
-    R5.voice_clients[0].play(discord.FFmpegPCMAudio(returnAtmosphericSound(arg)))
+async def atmos(ctx, arg: str):
+    try:
+        R5.voice_clients[0].play(discord.FFmpegPCMAudio(returnAtmosphericSound(arg)))
+    except IndexError:
+        await ctx.send('BEEEEEP!')
 
+@R5.command('resources', brief='Provides a list of player resources')
+async def query(ctx):
+    try:
+        if not R5.voice_clients[0].is_playing():
+            R5.voice_clients[0].play(discord.FFmpegPCMAudio(returnRandomSound()))
+            await ctx.message.author.send(rules + "\n~~~~~~~~~~~~~~~~~~~~\n" + diceApp + "\n~~~~~~~~~~~~~~~~~~~~\n" + videoGuide)
+        else:
+            await ctx.message.author.send(rules + "\n~~~~~~~~~~~~~~~~~~~~\n" + diceApp + "\n~~~~~~~~~~~~~~~~~~~~\n" + videoGuide)
+    except discord.ext.commands.CommandInvokeError:
+        await ctx.message.author.send(rules + "\n~~~~~~~~~~~~~~~~~~~~\n" + diceApp + "\n~~~~~~~~~~~~~~~~~~~~\n" + videoGuide)
+    except AttributeError:
+        await ctx.message.author.send(rules + "\n~~~~~~~~~~~~~~~~~~~~\n" + diceApp + "\n~~~~~~~~~~~~~~~~~~~~\n" + videoGuide)
+    except IndexError:
+        await ctx.message.author.send(rules + "\n~~~~~~~~~~~~~~~~~~~~\n" + diceApp + "\n~~~~~~~~~~~~~~~~~~~~\n" + videoGuide)
+    
 
-R5.run("")
-
-
-"Player Handbook can be downloaded here:"
-"https://drive.google.com/file/d/1etmm_GumqWdRdmlRZBA2hEGKR2sadT-G/view?usp=sharing"
-
-"Free App for Dice for Cheap Ass Folks:"
-"https://play.google.com/store/apps/details?id=com.visttux.empireedgediceroller&hl=en_US&gl=US"
-
-"Guide for people who can't read (Like me)"
-"https://www.youtube.com/watch?v=Ht6x47NhgG8"
+R5.run("ODA0NDg3MTY5MDg2ODQ5MDU1.YBNDDw._RU6NG_bL39bO_0q2zC9NizMXAw")
