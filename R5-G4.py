@@ -110,3 +110,13 @@ async def query(ctx, arg: str):
 
 
 R5.run("")
+
+
+"Player Handbook can be downloaded here:"
+"https://drive.google.com/file/d/1etmm_GumqWdRdmlRZBA2hEGKR2sadT-G/view?usp=sharing"
+
+"Free App for Dice for Cheap Ass Folks:"
+"https://play.google.com/store/apps/details?id=com.visttux.empireedgediceroller&hl=en_US&gl=US"
+
+"Guide for people who can't read (Like me)"
+"https://www.youtube.com/watch?v=Ht6x47NhgG8"
