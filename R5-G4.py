@@ -20,9 +20,9 @@ videoGuide = "Quick Video Tutorial :https://www.youtube.com/watch?v=Ht6x47NhgG8"
 fullResource = rules + "\n~~~~~~~~~~~~~~~~~~~~\n" + diceApp + "\n~~~~~~~~~~~~~~~~~~~~\n" + videoGuide
 
 
-@R5.command('DBtest')
+@R5.command('planets', brief="List planets/locations that have been visited")
 async def DBtest(ctx):
-    await ctx.send(mem.dbtest2())
+    await ctx.send(mem.getPlanetList())
 
 @R5.command('speak', brief="*R5 plays a random sound")
 async def speak(ctx):
