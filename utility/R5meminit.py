@@ -4,13 +4,30 @@ from R5config import DB_KEY
 
 R5MemInit = MongoClient(DB_KEY)
 
-db = R5MemInit["R5-test"]
-collection = db["test"]
+db = R5MemInit["R5-mem"]
+collection = db["planetData"]
 
-post1={"_id":1,"Mars":"Red"}
+# post1={"_id":1,"Mars":"Red"}
 
-collection.insert_one(post1)
+# collection.insert_one(post1)
 
+pname1 = "The Wheel"
+pdes1 = "Formerly known as space station BDT-0978. Located in the Besh Gorgon system in the Mid Rim. Divided into levels hosting casinos, cantinas, sports arenas, and a variety of shops. Currently known to be hosting a large underworld presence..."
+
+
+def insertPlanet(name:str,description:str):
+    pid = collection.count_documents({})
+    post = {
+        "name": name,
+        "description": description,
+        "planetId": pid
+    }
+    collection.insert_one(post)
+
+
+
+print("Inserting Planet")
+insertPlanet(pname1,pdes1)
 
 # search via dictionary
 # results = collection.find({"hello":"world"})
