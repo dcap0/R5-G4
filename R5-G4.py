@@ -5,6 +5,7 @@ from discord.ext import commands
 
 import subsys.R5MemCalls as mem
 import subsys.R5SoundCalls as snd
+from utility.R5config import DIS_KEY
 
 
 
@@ -21,7 +22,7 @@ fullResource = rules + "\n~~~~~~~~~~~~~~~~~~~~\n" + diceApp + "\n~~~~~~~~~~~~~~~
 
 @R5.command('DBtest')
 async def DBtest(ctx):
-    await ctx.send(mem.dbtest())
+    await ctx.send(mem.dbtest2())
 
 @R5.command('speak', brief="*R5 plays a random sound")
 async def speak(ctx):
@@ -124,4 +125,4 @@ async def query(ctx):
         await ctx.message.author.send(fullResource)
     
 
-R5.run("")
+R5.run(DIS_KEY)
