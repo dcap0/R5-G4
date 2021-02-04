@@ -1,15 +1,15 @@
 import pymongo
 from pymongo import MongoClient
+from R5config import DB_KEY
 
-R5MemInit = MongoClient("mongodb+srv://R5:EAiGu4TH4I2SMmy2@r5-mem.7lkv7.mongodb.net/R5-mem?retryWrites=true&w=majority")
+R5MemInit = MongoClient(DB_KEY)
 
 db = R5MemInit["R5-test"]
 collection = db["test"]
 
-post = {"_id":0,"name":"ddmac"}
-post1={"_id":1,"name":"daniel"}
+post1={"_id":1,"Mars":"Red"}
 
-collection.insert_many([post,post1])
+collection.insert_one(post1)
 
 
 # search via dictionary
