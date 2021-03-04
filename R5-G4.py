@@ -1,5 +1,5 @@
 import time
-
+import random
 import discord
 from discord.ext import commands
 
@@ -21,8 +21,12 @@ fullResource = rules + "\n~~~~~~~~~~~~~~~~~~~~\n" + diceApp + "\n~~~~~~~~~~~~~~~
 
 
 @R5.command('planets', brief="List planets/locations that have been visited")
-async def DBtest(ctx):
+async def planets(ctx):
     await ctx.send(mem.getPlanetList())
+
+@R5.command('planet', brief="List current planet (under construction)")
+async def planet(ctx):
+    await ctx.send(mem.getCurrentPlanet())
 
 @R5.command('speak', brief="*R5 plays a random sound")
 async def speak(ctx):
@@ -99,6 +103,8 @@ async def query(ctx, arg: str):
         await ctx.message.author.send("https://starwars.fandom.com/wiki/" + userquery)
     except AttributeError:
         await ctx.message.author.send("https://starwars.fandom.com/wiki/" + userquery)
+    except IndexError: 
+        await ctx.message.author.send("https://starwars.fandom.com/wiki/" + userquery)
 
 
 @R5.command('atmos', brief='*Plays atmospheric sounds. R5:help atmos to get list of sounds',
@@ -110,7 +116,7 @@ async def atmos(ctx, arg: str):
         await ctx.send('BEEEEEP!')
 
 @R5.command('resources', brief='Provides a list of player resources')
-async def query(ctx):
+async def resources(ctx):
     try:
         if not R5.voice_clients[0].is_playing():
             R5.voice_clients[0].play(discord.FFmpegPCMAudio(snd.returnRandomSound()))

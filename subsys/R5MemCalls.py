@@ -11,5 +11,13 @@ def getPlanetList():
     queryResult = planets.find({})
     results = []
     for q in queryResult:
-        results.append(str(q))
+        results.append(str(q["name"]))
     return results
+
+def getCurrentPlanet():
+    queryResult = planets.find({})
+    results = []
+    for q in queryResult:
+        results.append(str(q["name"])+ ":\n" + str(q["description"]) + "\n")
+    return results[len(results) - 1]
+
