@@ -1,7 +1,7 @@
 # R5-G4
 ## A discord bot to assist people GMing Fantasy Flight Games Star Wars Tabletop.
 
-##Has the ability to:
+### Has the ability to:
   - Connect to Discord's voice channels
   - Play star wars sound effects and atmospheric sounds stored on a local file system
   - Roll Dice
