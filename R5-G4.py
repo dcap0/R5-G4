@@ -5,7 +5,7 @@ from discord.ext import commands
 
 import subsys.R5MemCalls as mem
 import subsys.R5SoundCalls as snd
-from utility.R5config import DIS_KEY
+import os
 
 
 
@@ -131,4 +131,4 @@ async def resources(ctx):
         await ctx.message.author.send(fullResource)
     
 
-R5.run(DIS_KEY)
+R5.run(os.getenv("R5_KEY"))
